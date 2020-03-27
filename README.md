@@ -298,6 +298,11 @@ const grow = css({
     color: #123456;
   }
   ```
+
 ## Credits
 
-A lot of inspiration and work for this library comes from Picostyle.  Some of the work I added to Picostyle is also found here.
+A lot of inspiration and work for this library comes from Picostyle.  Some of the work I added to Picostyle including css export is also found here.
+
+### **Differences between morpho and picostyle**
+
+Morpho adds a lot of additional features that are not found in Picostyle including: list values, default numeric units, vendor prefixing, nesting, and dynamic values from props.
