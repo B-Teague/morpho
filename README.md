@@ -7,7 +7,7 @@ A tiny CSS-in-JS framework with all the bells and wistles.
 Install nanostyle
 
 ```sh
-npm i nanostyle
+npm i //To be determined//
 ```
 
 With a module bundler like Rollup or Webpack, import nanostyle into your application
@@ -20,7 +20,7 @@ If a bundler is not being used, nanostyle can be imported in a &lt;script&gt; ta
 
 ```html
 <script type="module">
-  import nanostyle from "https://unpkg.com/nanostyle"
+  import nanostyle from "https://unpkg.com//to be determined//"
 </script>
 ```
 
