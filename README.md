@@ -4,13 +4,29 @@ A tiny CSS-in-JS framework with all the bells and wistles.
 
 Documentation in progress.
 
-# Getting Started
+## Setup
 
 Install nanostyle
 
 ```sh
 npm i nanostyle
 ```
+
+With a module bundler like Rollup or Webpack, import nanostyle into your application
+
+```js
+import nanostyle from "nanostyle"
+```
+
+If a bundler is not being used, nanostyle can be imported in a script> tag as a module.
+
+```html
+<script type="module">
+  import nanostyle from "https://unpkg.com/nanostyle"
+</script>
+```
+
+## Getting Started
 
 ```js
 const options = {
@@ -52,9 +68,10 @@ const grow = css({
 })
 ```
 
-# Features
+## Features
 
 * ## **Framework agnostic**
+
   * Use with Hyperapp, React, Vue or anything that has a class attribute or exposes an ```h()``` function
 
 * ## **Tiny < 3k**
@@ -84,6 +101,7 @@ const grow = css({
   ```
 
 * ## **Style an unstyled component**
+  
   ```js
   const Button = (props) => h("div", {class: props.class}, props.children);
 
@@ -96,7 +114,7 @@ const grow = css({
   
   ```css
   .nano-en4vga {
-    -webkit-box-direction: normal; 
+    -webkit-box-direction: normal;
     box-direction: normal;
   }
   ```
@@ -182,7 +200,7 @@ const grow = css({
 
   ```css
   .nano-ta4jzb {
-    -webkit-transition: width 2s; 
+    -webkit-transition: width 2s;
     transition: width 2s;
   }
   ```
@@ -282,7 +300,3 @@ const grow = css({
     color: #123456;
   }
   ```
-
-
-* [ ] Publish on npm
-* [ ] Publish on unpkg

@@ -57,13 +57,13 @@ collisionCheck = {};
 //!!! WARNING !!!
 //This hash function may cause collision with future css property names
 //A different hash function will need to be replaced here and in index.js to create a perfect hash
-var h = new Uint16Array(1)
+var n = new Uint16Array(1)
 function hashCssProp(prop) {
-  h[0] = 0;
+  n[0] = 0;
   for (var i = 0; i < prop.length; i++) {
-    h[0] = ((h[0] << 4) - h[0]) + prop.charCodeAt(i);
+    n[0] = ((n[0] << 4) - n[0]) + prop.charCodeAt(i);
   }
-  return h[0].toString(36);
+  return n[0].toString(36);
 }
 
 //Find all browsers
@@ -223,6 +223,16 @@ Object.keys(cssPrefixes).forEach((prop) => {
   })
 })
 
+let index = fs.readFileSync('./util/index.template.js', 'utf-8')
+
+index = index.replace("{{vendors}}", JSON.stringify(vendors, (v, k) => {return k}))
+index = index.replace("{{vendorCssProps}}", JSON.stringify(vendorCssProps, (v, k) => {return k}))
+index = index.replace("{{unitlessCssProps}}", JSON.stringify(unitlessCssProps, (v, k) => {return k}))
+index = index.replace("{{hashCssProp}}", JSON.stringify(hashCssProp, (k, v) => k + v).replace(/"/g, "").replace(/(\\r\\n|\\n)/g, "\n"))
+
+fs.writeFileSync('./src/index.js', index);
+
+/*
 fs.writeFileSync('./src/cssProps.js',
   `//This file is generated from "./util/createCssPropMap.js"
 //Supported browser versions and vendor prefixes are based on data 
@@ -252,3 +262,4 @@ for (let prop of unitlessCssProps) {
 }
 
 export {hashCssProp, cssProps}`)
+*/
