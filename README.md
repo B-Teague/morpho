@@ -18,7 +18,7 @@ With a module bundler like Rollup or Webpack, import nanostyle into your applica
 import nanostyle from "nanostyle"
 ```
 
-If a bundler is not being used, nanostyle can be imported in a script> tag as a module.
+If a bundler is not being used, nanostyle can be imported in a &lt;script&gt; tag as a module.
 
 ```html
 <script type="module">
