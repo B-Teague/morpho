@@ -83,7 +83,7 @@ const grow = css({
 * ## **Style a component**
 
   ```js
-  const Button = styled("div")({
+  const Button = styled("div", {
     margin: "1em",
     padding: "0.25em 1em",
     borderRadius: "3px"
@@ -93,7 +93,7 @@ const grow = css({
 * ## **Extend a component**
   
   ```js
-  const GreenButton = styled(Button)({
+  const GreenButton = styled(Button, {
     color: "tomato",
   });
   ```
@@ -103,7 +103,7 @@ const grow = css({
   ```js
   const Button = (props) => h("div", {class: props.class}, props.children);
 
-  const OrangeButton styled(Button)({
+  const OrangeButton styled(Button, {
     backgroundColor: "orange"
   })
   ```
@@ -120,7 +120,7 @@ const grow = css({
 * ## **Custom class name prefixing**
 
   ```js
-  const Fancy = styled("div")({
+  const Fancy = styled("div", {
       borderRightWidth: 5
   },"article-header")
 
@@ -169,7 +169,7 @@ const grow = css({
 * ## **Numeric values**
   
   ```js
-  const Fancy = styled("div")({
+  const Fancy = styled("div", {
     "width": 5,
     "columns": 10
   })
@@ -191,7 +191,7 @@ const grow = css({
 * ## **List of values**
   
   ```js
-  const Fancy = styled("div")({
+  const Fancy = styled("div", {
     "transition": ["width", 2]
   })
   ```
@@ -206,7 +206,7 @@ const grow = css({
 * ## **Repeat properties using nested arrays**
 
   ```js
-  const Fancy = styled("div")({
+  const Fancy = styled("div", {
     position: [["-webkit-sticky"], ["sticky"]]
   })
   ```
@@ -221,7 +221,7 @@ const grow = css({
 * ## **Nesting**
   
   ```js
-  const Fancy = styled("div")({
+  const Fancy = styled("div", {
     "width": 5,
     "h1 &": {
       color: "orange",
@@ -245,7 +245,7 @@ const grow = css({
 * ## **Dynamically set css values from props**
 
   ```js
-  const Button = styled("div")(props => ({
+  const Button = styled("div", props => ({
     color: props.myColor || "green",
     width: props.size || "5px"
   }))
@@ -262,7 +262,7 @@ const grow = css({
 * ## **Pseudo selectors and elements**
 
   ```js
-  const Link = styled("div")({
+  const Link = styled("div", {
     color: "blue",
     "&:hover": {
       color: "red"
@@ -282,7 +282,7 @@ const grow = css({
 * ## **Combinators**
   
   ```js
-  const Fancy = styled("div")({
+  const Fancy = styled("div", {
     color: "#123456",
     "& + &": {
       color: "#32AB71"
