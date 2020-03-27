@@ -1,5 +1,5 @@
 {
-  "name": "nanostyle",
+  "name": "morpho",
   "version": "0.1.0",
   "description": "A tiny CSS-in-JS library using Javascript objects.",
   "author": "Brian Teague",
@@ -9,7 +9,7 @@
   "unpkg": "src/index.js",
   "browser": "src/index.js",
   "scripts": {
-    "test": "nyc -i esm -r lcov testmatrix test/nanostyle.test.js && nyc report",
+    "test": "nyc -i esm -r lcov testmatrix test/morpho.test.js && nyc report",
     "build": "npm run index && npm run bundle && npm run minify",
     "index": "node ./util/createIndex.js",
     "bundle": "cross-env-shell DIR=$PKG PKG=$npm_package_name rollup -i ${DIR}$npm_package_module -o ${DIR}dist/$PKG.js --no-esModule -mf iife -n $PKG",

@@ -1,26 +1,26 @@
-# nanostyle
+# morpho
 
 A tiny CSS-in-JS framework with all the bells and wistles.
 
 ## Setup
 
-Install nanostyle
+Install morpho
 
 ```sh
 npm i //To be determined//
 ```
 
-With a module bundler like Rollup or Webpack, import nanostyle into your application
+With a module bundler like Rollup or Webpack, import morpho into your application
 
 ```js
-import nanostyle from "nanostyle"
+import morpho from "morpho"
 ```
 
-If a bundler is not being used, nanostyle can be imported in a &lt;script&gt; tag as a module.
+If a bundler is not being used, morpho can be imported in a &lt;script&gt; tag as a module.
 
 ```html
 <script type="module">
-  import nanostyle from "https://unpkg.com//to be determined//"
+  import morpho from "https://unpkg.com//to be determined//"
 </script>
 ```
 
@@ -40,7 +40,7 @@ const options = {
   }
 }
 
-const { styled, css, keyframes } = nanostyle(h, options);
+const { styled, css, keyframes } = morpho(h, options);
 
 const customClass = css({
   color: "blue"
@@ -77,7 +77,7 @@ const grow = css({
 * ## **Fully scoped class names**
   
   ```css
-  .nano-nnbflx
+  .morpho-nnbflx
   ```
 
 * ## **Style a component**
@@ -111,7 +111,7 @@ const grow = css({
 * ## **Vendor Prefixing**
   
   ```css
-  .nano-en4vga {
+  .morpho-en4vga {
     -webkit-box-direction: normal;
     box-direction: normal;
   }
@@ -135,7 +135,7 @@ const grow = css({
   
   ```css
   @media (max-width: 450px) {
-    .nano-yi32xy {
+    .morpho-yi32xy {
       font-size: 32px;
     }
   }
@@ -155,7 +155,7 @@ const grow = css({
   ```
 
   ```css
-  @keyframes nano-nnbflx {
+  @keyframes morpho-nnbflx {
     from {
       transform: scale(2);
     }
@@ -197,7 +197,7 @@ const grow = css({
   ```
 
   ```css
-  .nano-ta4jzb {
+  .morpho-ta4jzb {
     -webkit-transition: width 2s;
     transition: width 2s;
   }
@@ -212,7 +212,7 @@ const grow = css({
   ```
 
   ```css
-  .nano-ta4jzb {
+  .morpho-ta4jzb {
     position: -webkit-sticky;
     position: sticky;
   }
@@ -236,10 +236,10 @@ const grow = css({
   ```
 
   ```css
-  .nano-dx8a25 {width: 5%;}
-  h1 .nano-dx8a25 {color: orange;}
-  h1 .nano-dx8a25 tag {font-size: 21px;}
-  h1 .nano-dx8a25 tag .nano-dx8a25 h2 {border: 5px;}
+  .morpho-dx8a25 {width: 5%;}
+  h1 .morpho-dx8a25 {color: orange;}
+  h1 .morpho-dx8a25 tag {font-size: 21px;}
+  h1 .morpho-dx8a25 tag .morpho-dx8a25 h2 {border: 5px;}
   ```
 
 * ## **Dynamically set css values from props**
@@ -253,7 +253,7 @@ const grow = css({
   ```
 
   ```css
-  .nano-qbjka {
+  .morpho-qbjka {
     color: orange;
     width: 20px;
   }
@@ -271,10 +271,10 @@ const grow = css({
   ```
 
   ```css
-  .nano-5tqubj:hover {
+  .morpho-5tqubj:hover {
     color: red;
   }
-  .nano-5tqubj {
+  .morpho-5tqubj {
     color: blue;
   }
   ```
@@ -291,10 +291,13 @@ const grow = css({
   ```
 
   ```css
-  .nano-ra155c + .nano-ra155c {
+  .morpho-ra155c + .morpho-ra155c {
     color: #32AB71;
   }
-  .nano-ra155c {
+  .morpho-ra155c {
     color: #123456;
   }
   ```
+## Credits
+
+A lot of inspiration and work for this library comes from Picostyle.  Some of the work I added to Picostyle is also found here.

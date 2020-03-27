@@ -9,7 +9,7 @@ import preact from 'preact';
 
 import { equal, deepEqual } from "testmatrix"
 
-import nanostyle from ".."
+import morpho from ".."
 
 const options = {
   unit: "%",
@@ -25,16 +25,16 @@ const options = {
 }
 
 
-const { styled, css, keyframes } = nanostyle(h, {childParam: true});
-const n2 = nanostyle(h, options);
-const nanoPreact = nanostyle(preact.h);
+const { styled, css, keyframes } = morpho(h, {childParam: true});
+const n2 = morpho(h, options);
+const morphoPreact = morpho(preact.h);
 
 const unstyled = (props) => {
   return h("div", { class: props.class }, props.children)
 }
 
 export default {
-  nanostyle: [
+  morpho: [
     { //#1
       name: "Create a class using the css function without prefix option",
       assert: equal,
@@ -42,7 +42,7 @@ export default {
         css({ backgroundColor: "red" })
         return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
       })(),
-      expected: ".nano-nnbflx {background-color: red;}"
+      expected: ".morpho-nnbflx {background-color: red;}"
     },
     { //#2
       name: "Create a styled component",
@@ -53,7 +53,7 @@ export default {
         })()
         return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
       })(),
-      expected: ".nano-nh5zfc {background-color: blue;}"
+      expected: ".morpho-nh5zfc {background-color: blue;}"
     },
     { //#3
       name: "insert vendor prefix",
@@ -64,7 +64,7 @@ export default {
         })()
         return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
       })(),
-      expected: ".nano-en4vga {-webkit-box-direction: normal; box-direction: normal;}"
+      expected: ".morpho-en4vga {-webkit-box-direction: normal; box-direction: normal;}"
     },
     { //#4
       name: "Create a unique keyframes name to be used by a css class",
@@ -80,7 +80,7 @@ export default {
         })
         return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
       })(),
-      expected: "@keyframes nano-o2rq5t { \n  from {-webkit-transform: scale(2); transform: scale(2);} \n  to {-webkit-transform: scale(4); transform: scale(4);} \n}"
+      expected: "@keyframes morpho-o2rq5t { \n  from {-webkit-transform: scale(2); transform: scale(2);} \n  to {-webkit-transform: scale(4); transform: scale(4);} \n}"
     },
     { //#5
       name: "create a media query",
@@ -101,8 +101,8 @@ export default {
         ]
       })(),
       expected: [
-        "@media (max-width: 450px) {.nano-yi32xy h1 {color: yellow;}.nano-yi32xy {font-size: 32px;}}",
-        ".nano-yi32xy {font-size: 10px;}"
+        "@media (max-width: 450px) {.morpho-yi32xy h1 {color: yellow;}.morpho-yi32xy {font-size: 32px;}}",
+        ".morpho-yi32xy {font-size: 10px;}"
       ]
     },
     { //#6
@@ -114,7 +114,7 @@ export default {
         })()
         return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0];
       })(),
-      expected: ".nano-6oi6pv {background-color: orange;}"
+      expected: ".morpho-6oi6pv {background-color: orange;}"
     },
     { //#7
       name: "repeat a css property multiple times using an array of values",
@@ -125,7 +125,7 @@ export default {
         })()
         return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0];
       })(),
-      expected: ".nano-b34ut1 {position: sticky;}" //! Both occurrences of position were inserted, but the browser only selects the last successful match
+      expected: ".morpho-b34ut1 {position: sticky;}" //! Both occurrences of position were inserted, but the browser only selects the last successful match
     },
     { //#8
       name: "extend a styled component",
@@ -143,7 +143,7 @@ export default {
       expected: {
         "name": "div",
         "props": {
-          "class": "nano-ber9to nano-ppbal9"
+          "class": "morpho-ber9to morpho-ppbal9"
         },
         "children": [],
         node: undefined,
@@ -162,7 +162,7 @@ export default {
         Button({ myColor: "orange" });
         return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
       })(),
-      expected: ".nano-qbjka {color: orange; font-size: 5px;}"
+      expected: ".morpho-qbjka {color: orange; font-size: 5px;}"
     },
     { //#10
       name: "pseudo selector",
@@ -182,8 +182,8 @@ export default {
 
       })(),
       expected: [
-        ".nano-5tqubj:hover {color: red;}",
-        ".nano-5tqubj {color: blue;}"
+        ".morpho-5tqubj:hover {color: red;}",
+        ".morpho-5tqubj {color: blue;}"
       ]
     },
     { //#11
@@ -204,8 +204,8 @@ export default {
 
       })(),
       expected: [
-        ".someParentClass .nano-dd0dfr {border: 3px;}",
-        ".nano-dd0dfr {font-size: 91em;}"
+        ".someParentClass .morpho-dd0dfr {border: 3px;}",
+        ".morpho-dd0dfr {font-size: 91em;}"
       ]
     },
     { //#12
@@ -226,8 +226,8 @@ export default {
 
       })(),
       expected: [
-        ".nano-ra155c + .nano-ra155c {color: #32AB71;}",
-        ".nano-ra155c {color: #123456;}"
+        ".morpho-ra155c + .morpho-ra155c {color: #32AB71;}",
+        ".morpho-ra155c {color: #123456;}"
       ]
     },
     { //#13
@@ -241,7 +241,7 @@ export default {
         return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
 
       })(),
-      expected: ".nano-ta4jzb {-webkit-transition: width 2s; transition: width 2s;}"
+      expected: ".morpho-ta4jzb {-webkit-transition: width 2s; transition: width 2s;}"
     },
     { //#14
       name: "Default units for numeric values",
@@ -255,7 +255,7 @@ export default {
         return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
 
       })(),
-      expected: ".nano-7nkqy1 {width: 5%; -webkit-columns: 10; columns: 10;}"
+      expected: ".morpho-7nkqy1 {width: 5%; -webkit-columns: 10; columns: 10;}"
     },
     { //#15
       name: "Triple nested content",
@@ -283,10 +283,10 @@ export default {
 
       })(),
       expected: [
-        "h1 .nano-dx8a25 tag .nano-dx8a25 h2 {border: 5px;}",
-        "h1 .nano-dx8a25 tag {font-size: 21px;}",
-        "h1 .nano-dx8a25 {color: orange;}",
-        ".nano-dx8a25 {width: 5%;}"
+        "h1 .morpho-dx8a25 tag .morpho-dx8a25 h2 {border: 5px;}",
+        "h1 .morpho-dx8a25 tag {font-size: 21px;}",
+        "h1 .morpho-dx8a25 {color: orange;}",
+        ".morpho-dx8a25 {width: 5%;}"
       ]
     },
     { //#16
@@ -322,13 +322,13 @@ export default {
         return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
 
       })(),
-      expected: ".nano-sk08h6 {height: 5em;}"
+      expected: ".morpho-sk08h6 {height: 5em;}"
     },
     { //#19
       name: "Pass children through props.children",
       assert: equal,
       actual: (() => {
-        const FancyBorder = nanoPreact.styled("div", {
+        const FancyBorder = morphoPreact.styled("div", {
           borderRadius: 5
         })
         return JSON.stringify(FancyBorder({children: "A child string"}))
@@ -338,7 +338,7 @@ export default {
         "type":"div",
         "props":{
           "children":"A child string",
-          "class":"nano-1gn34l"
+          "class":"morpho-1gn34l"
         },
         "__k":null,
         "__":null,

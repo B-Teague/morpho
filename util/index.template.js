@@ -1,7 +1,7 @@
 //This file is generated from ./util/index.template.js based on browserslist configuration and mdn-browser-compat-data for vendor prefixing
 var sheet = document.head.appendChild(document.createElement("style")).sheet
 var cache = {
-  prefix: "nano",
+  prefix: "morpho",
   unit: "px"
 };
 
