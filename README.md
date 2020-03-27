@@ -2,8 +2,6 @@
 
 A tiny CSS-in-JS framework with all the bells and wistles.
 
-Documentation in progress.
-
 ## Setup
 
 Install nanostyle
