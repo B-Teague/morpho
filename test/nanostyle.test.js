@@ -1,5 +1,12 @@
 import 'jsdom-global/register'
 import { h } from "hyperapp"
+import preact from 'preact';
+
+// // Create your app
+// const app = preact.h('h1', null, 'Hello World!');
+
+// render(app, document.body);
+
 import { equal, deepEqual } from "testmatrix"
 
 import nanostyle from ".."
@@ -17,8 +24,10 @@ const options = {
   }
 }
 
-const { styled, css, keyframes } = nanostyle(h);
+
+const { styled, css, keyframes } = nanostyle(h, {childParam: true});
 const n2 = nanostyle(h, options);
+const nanoPreact = nanostyle(preact.h);
 
 const unstyled = (props) => {
   return h("div", { class: props.class }, props.children)
@@ -314,6 +323,29 @@ export default {
 
       })(),
       expected: ".nano-sk08h6 {height: 5em;}"
+    },
+    { //#19
+      name: "Pass children through props.children",
+      assert: equal,
+      actual: (() => {
+        const FancyBorder = nanoPreact.styled("div", {
+          borderRadius: 5
+        })
+        return JSON.stringify(FancyBorder({children: "A child string"}))
+
+      })(),
+      expected: JSON.stringify({
+        "type":"div",
+        "props":{
+          "children":"A child string",
+          "class":"nano-1gn34l"
+        },
+        "__k":null,
+        "__":null,
+        "__b":0,
+        "__e":null,
+        "__c":null
+      })
     },
   ]
 }

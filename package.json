@@ -29,6 +29,7 @@
     "jsdom-global": "^3.0.2",
     "mdn-browser-compat-data": "^1.0.12",
     "nyc": "^15.0.0",
+    "preact": "^10.3.4",
     "rollup": "^2.0.6",
     "terser": "^4.6.6",
     "testmatrix": "^0.1.2"

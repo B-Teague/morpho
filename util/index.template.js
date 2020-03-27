@@ -118,11 +118,11 @@ export default function (h, options) {
   return { styled, css, keyframes }
 
   function styled(nodeName, decls, prefix) {
-    return function (props, children) {
+    return function (props, context) {
       props = props || {}
       props[classProp] = [props[classProp], css(isFunc(decls) ? decls(props) : decls, prefix)]
         .filter(Boolean).join(" ")
-      return isFunc(nodeName) ? nodeName(props) : h(nodeName, props, children)
+      return isFunc(nodeName) ? nodeName(props, context) : h(nodeName, props, options.childParam ? context : props.children || [])
     }
   }
 
