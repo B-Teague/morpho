@@ -1,6 +1,7 @@
-# morpho ![Morpho logo](./assets/Morpho.svg)
+# <center>![Morpho logo](./assets/Morpho.svg)</center>
 
-Small and beautiful CSS-in-JS library
+## <center>Morpho</center>
+**<center>Small and beautiful CSS-in-JS library</center>**
 
 ## Setup
 
