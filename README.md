@@ -1,6 +1,6 @@
 # morpho ![Morpho logo](./assets/Morpho.svg)
 
-A tiny CSS-in-JS framework with all the bells and wistles.
+Small and beautiful CSS-in-JS library
 
 ## Setup
 
