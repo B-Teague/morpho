@@ -1,0 +1,23 @@
+{
+  "name": "@morpho/style",
+  "version": "0.1.0",
+  "description": "Create styled components for JSX libraries like Hyperapp, React, Preact, etc.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/B-Teague/morpho/tree/master/lib/style"
+  },
+  "keywords": [
+    "morpho",
+    "css-in-js",
+    "styled",
+    "css",
+    "hyperapp",
+    "react"
+  ],
+  "author": "Brian Teague",
+  "license": "MIT"
+}

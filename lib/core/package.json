@@ -1,0 +1,25 @@
+{
+  "name": "@morpho/core",
+  "version": "0.1.0",
+  "description": "Core logic in morpho for creating and caching scoped css classes",
+  "main": "index.js",
+  "scripts": {
+    "test": "cross-env-shell ../../node_modules/.bin/nyc -i esm -r lcov ../../node_modules/.bin/testmatrix test/core.test.js && cross-env-shell ../../node_modules/.bin/nyc report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/B-Teague/morpho/tree/master/lib/core"
+  },
+  "keywords": [
+    "morpho",
+    "css-in-js",
+    "css",
+    "hyperapp",
+    "react"
+  ],
+  "author": "Brian Teague",
+  "license": "MIT",
+  "devDependencies": {
+    "cross-env": "^7.0.2"
+  }
+}

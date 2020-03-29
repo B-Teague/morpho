@@ -1,0 +1,23 @@
+{
+  "name": "@morpho/unit",
+  "version": "0.1.0",
+  "description": "Adds default units for css properties with numerical values",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/B-Teague/morpho/tree/master/lib/unit"
+  },
+  "keywords": [
+    "morpho",
+    "css-in-js",
+    "unit",
+    "css",
+    "hyperapp",
+    "react"
+  ],
+  "author": "Brian Teague",
+  "license": "MIT"
+}
