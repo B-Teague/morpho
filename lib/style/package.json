@@ -4,7 +4,7 @@
   "description": "Create styled components for JSX libraries like Hyperapp, React, Preact, etc.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cross-env-shell ../../node_modules/.bin/nyc -i esm -r lcov ../../node_modules/.bin/testmatrix test/style.test.js && cross-env-shell ../../node_modules/.bin/nyc report"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,8 @@
     "react"
   ],
   "author": "Brian Teague",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "cross-env": "^7.0.2"
+  }
 }

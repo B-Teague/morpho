@@ -4,7 +4,11 @@
   "description": "Adds automatic vendor prefixing for css properties based on browserslist and mdn-browser-compat-data",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env-shell ../../node_modules/.bin/nyc -i esm -r lcov ../../node_modules/.bin/testmatrix test/vendor.test.js && cross-env-shell ../../node_modules/.bin/nyc report"
+    "test": "cross-env-shell ../../node_modules/.bin/nyc -i esm -r lcov ../../node_modules/.bin/testmatrix test/vendor.test.js && cross-env-shell ../../node_modules/.bin/nyc report",
+    "build": "npm run createIndex && npm run bundle && npm run minify",
+    "createIndex": "node ./util/createIndex.js",
+    "bundle": "cross-env-shell DIR=$PKG PKG=vendor rollup -i ${DIR}$npm_package_module -o ${DIR}dist/$PKG.js --no-esModule -mf iife -n $PKG",
+    "minify": "cross-env-shell DIR=$PKG PKG=vendor terser ${DIR}dist/$PKG.js -o ${DIR}dist/$PKG.js -mc --source-map includeSources,url=$PKG.js.map"
   },
   "repository": {
     "type": "git",

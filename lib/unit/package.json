@@ -4,7 +4,11 @@
   "description": "Adds default units for css properties with numerical values",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cross-env-shell ../../node_modules/.bin/nyc -i esm -r lcov ../../node_modules/.bin/testmatrix test/unit.test.js && cross-env-shell ../../node_modules/.bin/nyc report",
+    "build": "npm run createIndex && npm run bundle && npm run minify",
+    "createIndex": "node ./util/createIndex.js",
+    "bundle": "cross-env-shell DIR=$PKG PKG=unit rollup -i ${DIR}$npm_package_module -o ${DIR}dist/$PKG.js --no-esModule -mf iife -n $PKG",
+    "minify": "cross-env-shell DIR=$PKG PKG=unit terser ${DIR}dist/$PKG.js -o ${DIR}dist/$PKG.js -mc --source-map includeSources,url=$PKG.js.map"
   },
   "repository": {
     "type": "git",
@@ -19,5 +23,8 @@
     "react"
   ],
   "author": "Brian Teague",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "cross-env": "^7.0.2"
+  }
 }
