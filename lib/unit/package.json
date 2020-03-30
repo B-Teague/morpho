@@ -1,14 +1,17 @@
 {
   "name": "@morpho/unit",
+  "alias": "unit",
   "version": "0.1.0",
   "description": "Adds default units for css properties with numerical values",
-  "main": "index.js",
+  "main": "src/index.js",
+  "unpkg": "src/index.js",
+  "module": "src/index.js",
   "scripts": {
     "test": "cross-env-shell ../../node_modules/.bin/nyc -i esm -r lcov ../../node_modules/.bin/testmatrix test/unit.test.js && cross-env-shell ../../node_modules/.bin/nyc report",
     "build": "npm run createIndex && npm run bundle && npm run minify",
     "createIndex": "node ./util/createIndex.js",
-    "bundle": "cross-env-shell DIR=$PKG PKG=unit rollup -i ${DIR}$npm_package_module -o ${DIR}dist/$PKG.js --no-esModule -mf iife -n $PKG",
-    "minify": "cross-env-shell DIR=$PKG PKG=unit terser ${DIR}dist/$PKG.js -o ${DIR}dist/$PKG.js -mc --source-map includeSources,url=$PKG.js.map"
+    "bundle": "cross-env-shell DIR=$PKG PKG=$npm_package_alias ../../node_modules/.bin/rollup -i ${DIR}$npm_package_module -o ${DIR}dist/$PKG.js --no-esModule -mf iife -n $PKG",
+    "minify": "cross-env-shell DIR=$PKG PKG=$npm_package_alias ../../node_modules/.bin/terser ${DIR}dist/$PKG.js -o ${DIR}dist/$PKG.js -mc --source-map includeSources,url=$PKG.js.map"
   },
   "repository": {
     "type": "git",
@@ -17,7 +20,7 @@
   "keywords": [
     "morpho",
     "css-in-js",
-    "unit",
+    "@morpho/unit",
     "css",
     "hyperapp",
     "react"

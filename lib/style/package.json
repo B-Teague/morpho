@@ -1,10 +1,16 @@
 {
   "name": "@morpho/style",
+  "alias": "style",
   "version": "0.1.0",
   "description": "Create styled components for JSX libraries like Hyperapp, React, Preact, etc.",
-  "main": "index.js",
+  "main": "src/index.js",
+  "unpkg": "src/index.js",
+  "module": "src/index.js",
   "scripts": {
-    "test": "cross-env-shell ../../node_modules/.bin/nyc -i esm -r lcov ../../node_modules/.bin/testmatrix test/style.test.js && cross-env-shell ../../node_modules/.bin/nyc report"
+    "test": "cross-env-shell ../../node_modules/.bin/nyc -i esm -r lcov ../../node_modules/.bin/testmatrix test/style.test.js && cross-env-shell ../../node_modules/.bin/nyc report",
+    "build": "npm run bundle && npm run minify",
+    "bundle": "cross-env-shell DIR=$PKG PKG=$npm_package_alias ../../node_modules/.bin/rollup -i ${DIR}$npm_package_module -o ${DIR}dist/$PKG.js --no-esModule -mf iife -n $PKG",
+    "minify": "cross-env-shell DIR=$PKG PKG=$npm_package_alias ../../node_modules/.bin/terser ${DIR}dist/$PKG.js -o ${DIR}dist/$PKG.js -mc --source-map includeSources,url=$PKG.js.map"
   },
   "repository": {
     "type": "git",
@@ -12,6 +18,7 @@
   },
   "keywords": [
     "morpho",
+    "@morpho/style",
     "css-in-js",
     "styled",
     "css",
