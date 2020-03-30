@@ -7,16 +7,16 @@
 
 ## Setup
 
-Install morpho
+Install morpho core library at minimum
 
 ```sh
-npm i //To be determined//
+npm i //to be determined//
 ```
 
 With a module bundler like Rollup or Webpack, import morpho into your application
 
 ```js
-import morpho from "morpho"
+import morpho from "@core/morpho"
 ```
 
 If a bundler is not being used, morpho can be imported in a &lt;script&gt; tag as a module.
@@ -30,8 +30,37 @@ If a bundler is not being used, morpho can be imported in a &lt;script&gt; tag a
 ## Getting Started
 
 ```js
-const options = {
-  classProp = "class" /* React uses className */
+const options = {} //See options below
+
+const { css, keyframes } = morpho(h, options);
+
+const generatedClassName = css({
+  color: "blue"
+})
+
+//Vue
+<div v-bind:class="[activeClass]"></div>
+data: {
+  activeClass: generatedClassName,
+}
+
+//React
+const Component = (props) => {
+  return <div className={generatedClassName}>Hello World</div>
+}
+
+//Hyperapp
+const Component = (props, children) => {
+  return h("div", {class: generatedClassName}, children)
+}
+
+```
+
+## Options
+
+```js
+{
+  classProp = "class" /* Name of the attribute used for css cl */
   childParam = true /* Hyperapp uses (props, children)
   childParam = false /*React (props) => {props.children}*/  
   unit: "em", //Global default numeric unit
@@ -41,56 +70,112 @@ const options = {
       unit: "%" //Default unit for single css property
     }
   }
+  vendorProps: vendorProps,
+  unitProps: unitProps
+  }
 }
-
-const { styled, css, keyframes } = morpho(h, options);
-
-const customClass = css({
-  color: "blue"
-})
-
-const Component = (props, children) => h("p", {class: customClass}, children)
-
-const StyledComponent = styled("p", {
-  fontSize: 10
-}, "customPrefix")
-
-const doubleSize =  keyframes({
-  from: {
-    transform: 'scale(2)'
-  },
-  to: {
-    transform: 'scale(4)'
-  },
-})
-
-const grow = css({
-  animation: [doubleSize, "300ms"]
-})
 ```
+
+* *classProp* - Only applies when using the ```@morpho/style``` library.  Use this to specify the name of the property that represents a css class.  For example, React uses the property name ```"className"```.  Default value is ```"class"```.
+  
+* *childParam* - Only applies when using the ```@morpho/style``` library.  This determines how the children property will be used.  For example, Hyperapp uses the function signature ```(props, children)``` while React uses the function signature ```(props)``` and children is accessed through ```props.children```.  Set this value to ```true``` for the ```(props, children)``` Component signature.  Default value is ```false```.
+  
+* *unit* - This option is used to specify the global default numerical unit.  Examples include: ```"%", "rem", or "px"```.  Default value is ```"px"```.
+
+* *cssProps* - Use this option to fully customize how each css property will apply vendor prefixing or default numerical values.  For example, if you want the css property ```transition``` to use the ```"-webkit-"``` prefix and a default unit in milliseconds ```"ms"```,  you would initialize this option to:
+
+  ```js
+  cssProps: {
+    transition: {
+      vendor: ["-webkit-"], //Accepts and applies a list of vendor prefixes
+      unit: "ms" //Appends a unit to a numerical value.  Ex: 5 -> 5ms
+    }
+  }
+  ```
+
+* *vendorProps* - Only applies when using the ```@morpho/vendor``` library.  This option is required when you want to load the vendor prefixes to a predefined list of css properties based on your supported list of browsers from ```browserslist``` and prefix data from ```mdn-browser-compat-data```.
+
+* *unitProps* - Only applies when using the ```@morpho/unit``` library.  This option is required when you want to load a list of predefined css properties and their corresponding default unit when a numerical value is entered.  
+  **TODO** - Set several different default units based on [CSS Best Practices](https://gist.github.com/basham/2175a16ab7c60ce8e001)
 
 ## Features
 
 * ## **Framework agnostic**
 
-  * Use with Hyperapp, React, Vue or anything that has a class attribute or exposes an ```h()``` function
+  * Use with Hyperapp, React, Vue or anything that has a class attribute
 
-* ## **Tiny < 3k**
+* ## **Tiny**
+  
+  * Core - 1.5 kb
 
-* ## **Fully scoped class names**
+  * Style - 0.3 kb
+
+  * Vendor - 0.85 kb
+  
+  * Unit - 0.5 kb 
+
+* ## **Unique scoped class names**
   
   ```css
   .morpho-nnbflx
   ```
 
-* ## **Style a component**
+* ## **Styled components**
 
+  * For any framework that supports JSX or exposes an h() function, you can use the ```@morpho/style``` library to create styled components
   ```js
+  import { morpho } from "@morpho/core"
+  const { css, keyframes } = morpho(options);
+
+  import {morphoStyle} from "@morpho/style"
+  const {styled} = morphoStyle(css, h) //Requires morpho's css function and the JSX h function
+  
   const Button = styled("div", {
     margin: "1em",
     padding: "0.25em 1em",
     borderRadius: "3px"
   });
+  ```
+
+* ## **Vendor Prefixing**
+   * If you wish to support vendor prefixing, you can use the ```@morpho/vendor``` library which has a predefined list of css properties based on data from ```browserlist``` and ```mdn-browser-compat-data```
+  
+  ```js
+  import { morpho } from "@morpho/core"
+  import { vendorProps } from "@morpho/vendor"
+
+  const { css, keyframes } = morpho({vendorProps});
+
+  const vendorClassName = css({
+    boxDirection: "normal"
+  })
+  ```
+
+  ```css
+  .morpho-en4vga {
+    -webkit-box-direction: normal;
+    box-direction: normal;
+  }
+  ```
+
+* ## **Custom default units**
+  * If you want ```morpho``` to default numerical values with unit, you can use the predefined list from ```@morpho\unit```. *Note - This list currently only contains css properties that are unitless.  The global default will append "px".  Todo - Add additional default units to several css properties based on [CSS Best Practices](https://gist.github.com/basham/2175a16ab7c60ce8e001)*
+  
+  ```js
+  import { morpho } from "@morpho/core"
+  import { unitProps } from "@morpho/vendor"
+
+  const { css, keyframes } = morpho({unitProps});
+
+  const vendorClassName = css({
+    border: 5
+  })
+  ```
+
+   ```css
+  .morpho-en4vga {
+    border: 5px;
+  }
   ```
 
 * ## **Extend a component**
@@ -109,15 +194,6 @@ const grow = css({
   const OrangeButton styled(Button, {
     backgroundColor: "orange"
   })
-  ```
-
-* ## **Vendor Prefixing**
-  
-  ```css
-  .morpho-en4vga {
-    -webkit-box-direction: normal;
-    box-direction: normal;
-  }
   ```
 
 * ## **Custom class name prefixing**
@@ -176,19 +252,6 @@ const grow = css({
     "width": 5,
     "columns": 10
   })
-  ```
-
-* ## **Custom default units**
-  
-  ```js
-  const options = {
-    unit: "%", //Set global default, normally px
-    cssProps: {
-      "height": {
-        "unit": "em" //Property default
-      }
-    }
-  }
   ```
 
 * ## **List of values**
