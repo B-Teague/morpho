@@ -5,6 +5,35 @@
 # <center>Morpho</center>
 **<center>Small and beautiful CSS-in-JS library</center>**
 
+## Features
+
+* **Tiny**
+  * morpho - 1.6 kb
+  * @morpho/style - 0.3 kb
+  * @morpho/vendor - 0.9 kb
+  * @morpho/unit - 0.5 kb
+* **Framework Agnostic** - use with Hyperapp, React, Vue, Angular or anything that has a class attribute
+* **Uniquely scoped class names:** ```.morpho-nnbflx```
+* **Custom css class name prefixing:** ```.article-header-xj38d```
+* **Custom default numerical units:** ```5 -> 5em```
+* **Vendor Prefixing** ```{-webkit-box-direction: normal; box-direction: normal;}```
+* **List values:** ```[width, 2] -> transition: width 2s;```
+* **@media queries** ```@media (max-width: 450px){}```
+* **@keyframes** ```@keyframes morpho-nnbflx {}```
+* **Nesting** ```.morpho-dx8a25 {} h1 .morpho-dx8a25 {}```
+* **Dynamic Prop values** ```props => ({color: props.color})```
+* **Pseudo Selectors and elements** ```.morpho-5tqubj:hover {}```
+* **Combinators** ```.morpho-ra155c + .morpho-ra155c {}```
+* **Styled Components** ```styled("div", {
+    borderRadius: "5px"
+  })```
+  * Style Unstyled Components ```styled(Button, {
+  color: "tomato"
+})```
+  * Extend Styled Components ```styled(GreenButton, {
+      fontSize: 10
+    })```
+
 ## Setup
 
 Install morpho library
@@ -26,19 +55,6 @@ If a bundler is not being used, morpho can be imported in a &lt;script&gt; tag a
   import morpho from "https://unpkg.com//to be determined//"
 </script>
 ```
-## **Tiny**
-  
-* morpho - 1.6 kb
-
-* @morpho/style - 0.3 kb
-
-* @morpho/vendor - 0.9 kb
-  
-* @morpho/unit - 0.5 kb
-
-## **Framework agnostic**
-
-* Use with Hyperapp, React, Vue, Angular or anything that has a class attribute
 
 ## Getting Started
 
@@ -113,7 +129,6 @@ data: {
 * *unitProps* - Only applies when using the ```@morpho/unit``` library.  This option is required when you want to load a list of predefined css properties and their corresponding default unit when a numerical value is entered.  
   **TODO** - Set several different default units based on [CSS Best Practices](https://gist.github.com/basham/2175a16ab7c60ce8e001)
 
-## Features
 
 * ## **Uniquely scoped class names**
   
