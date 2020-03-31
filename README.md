@@ -7,7 +7,7 @@
 
 ## Setup
 
-Install morpho library at minimum
+Install morpho library
 
 ```sh
 npm i //to be determined//
@@ -26,22 +26,34 @@ If a bundler is not being used, morpho can be imported in a &lt;script&gt; tag a
   import morpho from "https://unpkg.com//to be determined//"
 </script>
 ```
+## **Tiny**
+  
+* morpho - 1.5 kb
+
+* @morpho/style - 0.3 kb
+
+* @morpho/vendor - 0.85 kb
+  
+* @morpho/unit - 0.5 kb
+
+## **Framework agnostic**
+
+* Use with Hyperapp, React, Vue, Angular or anything that has a class attribute
 
 ## Getting Started
 
 ```js
 const options = {} //See options below
 
-const { css, keyframes } = morpho(h, options);
+const { css, keyframes } = morpho(options);
 
 const generatedClassName = css({
   color: "blue"
 })
 
-//Vue
-<div v-bind:class="[activeClass]"></div>
-data: {
-  activeClass: generatedClassName,
+//Hyperapp
+const Component = (props, children) => {
+  return h("div", {class: generatedClassName}, children)
 }
 
 //React
@@ -49,30 +61,31 @@ const Component = (props) => {
   return <div className={generatedClassName}>Hello World</div>
 }
 
-//Hyperapp
-const Component = (props, children) => {
-  return h("div", {class: generatedClassName}, children)
+//Vue
+<div v-bind:class="[activeClass]"></div>
+data: {
+  activeClass: generatedClassName,
 }
 
+//Angular
+<div [ngClass]="{[generatedClassName]: true}">
 ```
 
 ## Options
 
 ```js
 {
-  classProp = "class" /* Name of the attribute used for css cl */
-  childParam = true /* Hyperapp uses (props, children)
-  childParam = false /*React (props) => {props.children}*/  
-  unit: "em", //Global default numeric unit
+  classProp: "class",
+  childParam: true,
+  unit: "em",
   cssProps: {
-    "border": {
-      vendor: ["-webkit-", "-moz-"], //Override or add custom vendor prefixes
-      unit: "%" //Default unit for single css property
+    border: {
+      vendor: ["-webkit-", "-moz-"],
+      unit: "%"
     }
-  }
+  },
   vendorProps: vendorProps,
   unitProps: unitProps
-  }
 }
 ```
 
@@ -93,6 +106,8 @@ const Component = (props, children) => {
   }
   ```
 
+  Note: cssProps will override settings from ```@morpho/vendor``` and ```@morpho/unit```
+
 * *vendorProps* - Only applies when using the ```@morpho/vendor``` library.  This option is required when you want to load the vendor prefixes to a predefined list of css properties based on your supported list of browsers from ```browserslist``` and prefix data from ```mdn-browser-compat-data```.
 
 * *unitProps* - Only applies when using the ```@morpho/unit``` library.  This option is required when you want to load a list of predefined css properties and their corresponding default unit when a numerical value is entered.  
@@ -100,21 +115,7 @@ const Component = (props, children) => {
 
 ## Features
 
-* ## **Framework agnostic**
-
-  * Use with Hyperapp, React, Vue or anything that has a class attribute
-
-* ## **Tiny**
-  
-  * Morpho - 1.5 kb
-
-  * Style - 0.3 kb
-
-  * Vendor - 0.85 kb
-  
-  * Unit - 0.5 kb 
-
-* ## **Unique scoped class names**
+* ## **Uniquely scoped class names**
   
   ```css
   .morpho-nnbflx
@@ -123,12 +124,13 @@ const Component = (props, children) => {
 * ## **Styled components**
 
   * For any framework that supports JSX or exposes an h() function, you can use the ```@morpho/style``` library to create styled components
+  
   ```js
   import { morpho } from "morpho"
   const { css, keyframes } = morpho(options);
 
   import {morphoStyle} from "@morpho/style"
-  const {styled} = morphoStyle(css, h) //Requires morpho's css function and the JSX h function
+  const {styled} = morphoStyle(css, h, styleOptions) //Requires morpho's css function and the JSX h function
   
   const Button = styled("div", {
     margin: "1em",
@@ -249,8 +251,8 @@ const Component = (props, children) => {
   
   ```js
   const Fancy = styled("div", {
-    "width": 5,
-    "columns": 10
+    width: 5,
+    columns: 10
   })
   ```
 
@@ -258,7 +260,7 @@ const Component = (props, children) => {
   
   ```js
   const Fancy = styled("div", {
-    "transition": ["width", 2]
+    transition: ["width", 2]
   })
   ```
 
@@ -288,10 +290,10 @@ const Component = (props, children) => {
   
   ```js
   const Fancy = styled("div", {
-    "width": 5,
+    width: 5,
     "h1 &": {
       color: "orange",
-      "tag": {
+      tag: {
         fontSize: "21px",
         "& h2": {
           border: "5px"
