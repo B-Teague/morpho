@@ -1,4 +1,3 @@
-//This file is generated from ./util/index.template.js based on browserslist configuration and mdn-browser-compat-data for vendor prefixing
 var sheet = document.head.appendChild(document.createElement("style")).sheet
 var cache = {
   prefix: "morpho",
@@ -10,7 +9,6 @@ var cssProps = {}
 function isArr(v) { return !!v && v.constructor === Array }
 function isObj(v) { return !!v && v.constructor === Object }
 
-//!!! WARNING !!!
 //This hash function may cause collision with future css property names
 //This library requires a perfect hash function for vendor prefixing to work correctly.
 //This file will fail to generate from createCssPropMap.js if a collision is detected.
