@@ -7,7 +7,7 @@
 
 ## Setup
 
-Install morpho core library at minimum
+Install morpho library at minimum
 
 ```sh
 npm i //to be determined//
@@ -16,7 +16,7 @@ npm i //to be determined//
 With a module bundler like Rollup or Webpack, import morpho into your application
 
 ```js
-import morpho from "@core/morpho"
+import morpho from "morpho"
 ```
 
 If a bundler is not being used, morpho can be imported in a &lt;script&gt; tag as a module.
@@ -106,7 +106,7 @@ const Component = (props, children) => {
 
 * ## **Tiny**
   
-  * Core - 1.5 kb
+  * Morpho - 1.5 kb
 
   * Style - 0.3 kb
 
@@ -124,7 +124,7 @@ const Component = (props, children) => {
 
   * For any framework that supports JSX or exposes an h() function, you can use the ```@morpho/style``` library to create styled components
   ```js
-  import { morpho } from "@morpho/core"
+  import { morpho } from "morpho"
   const { css, keyframes } = morpho(options);
 
   import {morphoStyle} from "@morpho/style"
@@ -141,7 +141,7 @@ const Component = (props, children) => {
    * If you wish to support vendor prefixing, you can use the ```@morpho/vendor``` library which has a predefined list of css properties based on data from ```browserlist``` and ```mdn-browser-compat-data```
   
   ```js
-  import { morpho } from "@morpho/core"
+  import { morpho } from "morpho"
   import { vendorProps } from "@morpho/vendor"
 
   const { css, keyframes } = morpho({vendorProps});
@@ -162,7 +162,7 @@ const Component = (props, children) => {
   * If you want ```morpho``` to default numerical values with unit, you can use the predefined list from ```@morpho\unit```. *Note - This list currently only contains css properties that are unitless.  The global default will append "px".  Todo - Add additional default units to several css properties based on [CSS Best Practices](https://gist.github.com/basham/2175a16ab7c60ce8e001)*
   
   ```js
-  import { morpho } from "@morpho/core"
+  import { morpho } from "morpho"
   import { unitProps } from "@morpho/vendor"
 
   const { css, keyframes } = morpho({unitProps});
