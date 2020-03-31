@@ -7,8 +7,8 @@ var cache = {
 
 var cssProps = {}
 
-var isArr = v => !!v && v.constructor === Array
-var isObj = v => !!v && v.constructor === Object
+function isArr(v) { return !!v && v.constructor === Array }
+function isObj(v) { return !!v && v.constructor === Object }
 
 //!!! WARNING !!!
 //This hash function may cause collision with future css property names
@@ -42,9 +42,8 @@ function hyphenate(str) {
 function createStyle(rules, cssType, prefix) {
   var id = prefix + "-" + hash();
   var name = cssType + id
-  for (let rule of rules) {
-    rule = rule.replace(/&/g, name)
-    sheet.insertRule(rule, sheet.cssRules.lenth)
+  for (var i = 0; i < rules.length; i++) {
+    sheet.insertRule(rules[i].replace(/&/g, name), sheet.cssRules.lenth)
   }
   return id
 }
@@ -56,21 +55,21 @@ function wrap(str, prop) {
 function serialize(obj, parent) {
   var rules = []
   var css = ""
-  for (let prop in obj) {
+  for (var prop in obj) {
     var value = obj[prop]
 
     if (/^@/.test(prop)) { //nested @-rule objects only.  Doesn't support global @ rules
       rules.push(wrap(serialize(value, parent).join(""), prop))
     } else {
       if (isObj(value)) {
-        rules.push(...serialize(value, parent === "&" && prop.includes("&") ? prop : parent + " " + prop))
+        rules = rules.concat(serialize(value, parent === "&" && prop.includes("&") ? prop : parent + " " + prop))
       } else {
         prop = hyphenate(prop)
         var hashed = hashCssProp(prop)
         var {vendor, unit} = Object.assign({vendor: [], unit: cache.unit}, cssProps[hashed])
         value = isArr(value) ? isArr(value[0]) ? value : [value] : [[value]]
         css += value.reduce(function (propRepeat, value) {
-          value = value.map(val => typeof val === "number" ? val + unit : val).join(" ");
+          value = value.map(function (val) { return typeof val === "number" ? val + unit : val }).join(" ");
           return propRepeat + vendor.concat("").reduce(function (result, prefix) {
             return result + prefix + prop + ":" + value + ";" //Vendor prefixing
           }, "")
@@ -92,13 +91,13 @@ function fromCache(rules, cssType, prefix) {
 
 export default function (options) {
   options = options || {}
-  for (let prop in options.cssProps) {
+  for (var prop in options.cssProps) {
     cssProps[hashCssProp(hyphenate(prop))] = options.cssProps[prop]
   }
-  for (let prop in options.vendorProps) {
+  for (var prop in options.vendorProps) {
     cssProps[prop] = Object.assign(options.vendorProps[prop], cssProps[prop]);
   }
-  for (let prop in options.unitProps) {
+  for (var prop in options.unitProps) {
     cssProps[prop] = Object.assign(options.unitProps[prop], cssProps[prop]);
   }
 
