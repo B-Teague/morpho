@@ -28,11 +28,11 @@ If a bundler is not being used, morpho can be imported in a &lt;script&gt; tag a
 ```
 ## **Tiny**
   
-* morpho - 1.5 kb
+* morpho - 1.6 kb
 
 * @morpho/style - 0.3 kb
 
-* @morpho/vendor - 0.85 kb
+* @morpho/vendor - 0.9 kb
   
 * @morpho/unit - 0.5 kb
 
