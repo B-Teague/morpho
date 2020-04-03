@@ -1,7 +1,7 @@
 {
   "name": "@morpho/unit",
   "alias": "unit",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "description": "Adds default units for css properties with numerical values",
   "homepage": "https://github.com/B-Teague/morpho#readme",
   "main": "src/index.js",
