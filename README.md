@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="200" height="200" src="./assets/Morpho.svg">
+  <img width="200" height="200" src="./assets/Morpho.png">
 </p>
 
 # <center>Morpho</center>
@@ -39,7 +39,7 @@
 Install morpho library
 
 ```sh
-npm i //to be determined//
+npm i morpho
 ```
 
 With a module bundler like Rollup or Webpack, import morpho into your application
@@ -52,7 +52,7 @@ If a bundler is not being used, morpho can be imported in a &lt;script&gt; tag a
 
 ```html
 <script type="module">
-  import morpho from "https://unpkg.com//to be determined//"
+  import morpho from "https://unpkg.com/morpho@0.1.2/src/index.js"
 </script>
 ```
 
