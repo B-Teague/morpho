@@ -1,8 +1,10 @@
 {
   "name": "morpho",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A tiny CSS-in-JS library using Javascript objects.",
   "author": "Brian Teague",
+  "homepage": "https://github.com/B-Teague/morpho#readme",
+  "repository": "B-Teague/morpho",
   "license": "MIT",
   "main": "src/index.js",
   "module": "src/index.js",
