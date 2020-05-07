@@ -7,8 +7,7 @@
 
 ## Features
 
-* **Tiny**
-  * morpho - 3kb
+* **Tiny** - 3kb
 * **Framework Agnostic** - use with Hyperapp, React, Vue, Angular or anything that has a class attribute
 * **Uniquely scoped class names:** ```.morpho-nnbflx```
 * **Custom css class name prefixing:** ```.article-header-xj38d```
@@ -49,7 +48,7 @@ If a bundler is not being used, morpho can be imported in a &lt;script&gt; tag a
 
 ```html
 <script type="module">
-  import morpho from "https://unpkg.com/morpho@0.1.2/src/index.js"
+  import morpho from "https://unpkg.com/morpho@0.2.0/src/index.js"
 </script>
 ```
 
