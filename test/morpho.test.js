@@ -1,6 +1,7 @@
 import 'jsdom-global/register'
 
 import { equal, deepEqual } from "testmatrix"
+import { h } from "hyperapp"
 
 import morpho from "../src/index"
 
@@ -14,22 +15,13 @@ const options = {
     "height": {
       "unit": "em"
     }
-  },
-  vendorProps: {
-    "kzu": {
-      vendor: ["-webkit-"]
-    }
-  },
-  unitProps: {
-    "kzu": {
-      unit: "em"
-    }
   }
 }
 
 
-const { css, keyframes } = morpho(options);
+const { css, keyframes, styled } = morpho(h, options);
 const m2 = morpho();
+const styledWithChildren = morpho(h, { childParam: true })
 
 export default {
   morpho: [
@@ -67,7 +59,7 @@ export default {
         })
         return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
       })(),
-      expected: "@keyframes morpho-en4vga { \n  from {transform: scale(2);} \n  to {transform: scale(4);} \n}"
+      expected: "@keyframes morpho-en4vga { \n  from {-webkit-transform: scale(2); transform: scale(2);} \n  to {-webkit-transform: scale(4); transform: scale(4);} \n}"
     },
     { //#4
       name: "create a media query",
@@ -101,7 +93,7 @@ export default {
         });
         return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
       })(),
-      expected: ".morpho-yi32xy {border-radius: 10%;}"
+      expected: ".morpho-yi32xy {-webkit-border-radius: 10%; border-radius: 10%;}"
     },
     { //#6
       name: "pseudo selector",
@@ -138,19 +130,94 @@ export default {
         return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
 
       })(),
-      expected: ".morpho-ber9to {transition: width 2s;}"
+      expected: ".morpho-ber9to {-webkit-transition: width 2s; transition: width 2s;}"
     },
     { //#9
-      name: "Test morph without options parm",
+      name: "Test morph without options parm (uses new styleSheets)",
       assert: deepEqual,
       actual: (() => {
         m2.css({
           color: "orange"
         })
-        return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
+        return document.styleSheets[1].cssRules.map((rule) => rule.cssText)[0]
 
       })(),
-      expected: ".morpho-ppbal9 {color: orange;}"
+      expected: ".morpho-nnbflx {color: orange;}"
+    },
+    { //#10
+      name: "Create a styled component",
+      assert: equal,
+      actual: (() => {
+        styled("div", { border: 5 })()
+        return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
+      })(),
+      expected: ".morpho-ppbal9 {border: 5px;}"
+    },
+    { //#11
+      name: "Create a styled component with dynamic prop values",
+      assert: equal,
+      actual: (() => {
+        styled("div", props => ({ border: props.value || 0 }))({ value: 10 })
+        return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
+      })(),
+      expected: ".morpho-qbjka {border: 10px;}"
+    },
+    { //#12
+      name: "Extend a styled component",
+      assert: deepEqual,
+      actual: (() => {
+        var a = styled("div", { border: 5 })
+        var extended = styled(a, { color: "blue" })
+        return extended()
+      })(),
+      expected: {
+        "name": "div",
+        "props": {
+          "class": "morpho-5tqubj morpho-ppbal9"
+        },
+        "children": [],
+        node: undefined,
+        type: undefined,
+        key: undefined
+      }
+    },
+    { //#13
+      name: "Pass children to a styled component",
+      assert: deepEqual,
+      actual: (() => {
+        var Component = styledWithChildren.styled("div", { color: "blue" })
+        return Component({}, [
+          h("p", {}, "Some text from a child paragraph")
+        ])
+      })(),
+      expected: {
+        "name": "div",
+        "props": {
+          "class": "morpho-nnbflx"
+        },
+        "children": [
+          {
+            "name": "p",
+            "props": {},
+            "children": [
+              {
+                "name": "Some text from a child paragraph",
+                "props": {},
+                "children": [],
+                "type": 3,
+                node: undefined,
+                key: undefined
+              }
+            ],
+            node: undefined,
+            type: undefined,
+            key: undefined
+          }
+        ],
+        node: undefined,
+        type: undefined,
+        key: undefined
+      }
     }
   ]
 }

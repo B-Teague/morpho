@@ -8,10 +8,7 @@
 ## Features
 
 * **Tiny**
-  * morpho - 1.6 kb
-  * @morpho/style - 0.3 kb
-  * @morpho/vendor - 0.9 kb
-  * @morpho/unit - 0.5 kb
+  * morpho - 3kb
 * **Framework Agnostic** - use with Hyperapp, React, Vue, Angular or anything that has a class attribute
 * **Uniquely scoped class names:** ```.morpho-nnbflx```
 * **Custom css class name prefixing:** ```.article-header-xj38d```
@@ -61,7 +58,8 @@ If a bundler is not being used, morpho can be imported in a &lt;script&gt; tag a
 ```js
 const options = {} //See options below
 
-const { css, keyframes } = morpho(options);
+const { css, keyframes, styled } = morpho(h, options); 
+//h is only required for styled components
 
 const generatedClassName = css({
   color: "blue"
@@ -99,9 +97,7 @@ data: {
       vendor: ["-webkit-", "-moz-"],
       unit: "%"
     }
-  },
-  vendorProps: vendorProps,
-  unitProps: unitProps
+  }
 }
 ```
 
@@ -109,7 +105,7 @@ data: {
   
 * *childParam* - Only applies when using the ```@morpho/style``` library.  This determines how the children property will be used.  For example, Hyperapp uses the function signature ```(props, children)``` while React uses the function signature ```(props)``` and children is accessed through ```props.children```.  Set this value to ```true``` for the ```(props, children)``` Component signature.  Default value is ```false```.
   
-* *unit* - This option is used to specify the global default numerical unit.  Examples include: ```"%", "rem", or "px"```.  Default value is ```"px"```.
+* *unit* - This option is used to specify the global default numerical unit.  Examples include: ```"%", "rem", or "px"```.  Default value is ```"px"```. **TODO** - Set several different default units based on [CSS Best Practices](https://gist.github.com/basham/2175a16ab7c60ce8e001)
 
 * *cssProps* - Use this option to fully customize how each css property will apply vendor prefixing or default numerical values.  For example, if you want the css property ```transition``` to use the ```"-webkit-"``` prefix and a default unit in milliseconds ```"ms"```,  you would initialize this option to:
 
@@ -122,12 +118,7 @@ data: {
   }
   ```
 
-  Note: cssProps will override settings from ```@morpho/vendor``` and ```@morpho/unit```
-
-* *vendorProps* - Only applies when using the ```@morpho/vendor``` library.  This option is required when you want to load the vendor prefixes to a predefined list of css properties based on your supported list of browsers from ```browserslist``` and prefix data from ```mdn-browser-compat-data```.
-
-* *unitProps* - Only applies when using the ```@morpho/unit``` library.  This option is required when you want to load a list of predefined css properties and their corresponding default unit when a numerical value is entered.  
-  **TODO** - Set several different default units based on [CSS Best Practices](https://gist.github.com/basham/2175a16ab7c60ce8e001)
+  Note: cssProps will override default vendor and unit settings
 
 
 * ## **Uniquely scoped class names**
@@ -142,15 +133,13 @@ data: {
   
   ```js
   import { morpho } from "morpho"
-  const { css, keyframes } = morpho(options);
-
-  import {morphoStyle} from "@morpho/style"
-  const {styled} = morphoStyle(css, h, styleOptions) //Requires morpho's css function and the JSX h function
+  const { css, keyframes, styled } = morpho(h, options);
+  //styled requires a JSX h function
   
   const Button = styled("div", {
     margin: "1em",
     padding: "0.25em 1em",
-    borderRadius: "3px"
+    borderRadius: 3 //defaults to global unit "px"
   });
   ```
 
@@ -159,9 +148,8 @@ data: {
   
   ```js
   import { morpho } from "morpho"
-  import { vendorProps } from "@morpho/vendor"
 
-  const { css, keyframes } = morpho({vendorProps});
+  const { css, keyframes } = morpho();
 
   const vendorClassName = css({
     boxDirection: "normal"
@@ -180,9 +168,8 @@ data: {
   
   ```js
   import { morpho } from "morpho"
-  import { unitProps } from "@morpho/vendor"
 
-  const { css, keyframes } = morpho({unitProps});
+  const { css, keyframes } = morpho();
 
   const vendorClassName = css({
     border: 5
@@ -229,11 +216,17 @@ data: {
 
 * ## **Media queries**
   
+  ```js
+  css({
+    "@media (max-width: 450px)": {
+      fontSize: "32px"
+    }
+  })
+  ```
+
   ```css
   @media (max-width: 450px) {
-    .morpho-yi32xy {
-      font-size: 32px;
-    }
+    .morpho-o2rq5t {font-size: 32px;}
   }
   ```
 
@@ -269,6 +262,13 @@ data: {
     width: 5,
     columns: 10
   })
+  ```
+
+  ```css
+  .morpho-o2rq5t {
+    width: 5px;
+    columns: 10px;
+  }
   ```
 
 * ## **List of values**
