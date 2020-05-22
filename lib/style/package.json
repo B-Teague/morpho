@@ -1,7 +1,7 @@
 {
-  "name": "@morpho/style",
+  "name": "morpho-style",
   "alias": "style",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "Create styled components for JSX libraries like Hyperapp, React, Preact, etc.",
   "main": "src/index.js",
   "unpkg": "src/index.js",

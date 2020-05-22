@@ -1,7 +1,7 @@
 {
-  "name": "@morpho/vendor",
+  "name": "morpho-vendor",
   "alias": "vendor",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "Adds automatic vendor prefixing for css properties based on browserslist and mdn-browser-compat-data",
   "main": "src/index.js",
   "unpkg": "src/index.js",

@@ -14,16 +14,6 @@ const options = {
     "height": {
       "unit": "em"
     }
-  },
-  vendorProps: {
-    "kzu": {
-      vendor: ["-webkit-"]
-    }
-  },
-  unitProps: {
-    "kzu": {
-      unit: "em"
-    }
   }
 }
 

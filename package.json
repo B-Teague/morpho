@@ -1,6 +1,6 @@
 {
   "name": "morpho",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "A tiny CSS-in-JS library using Javascript objects.",
   "author": "Brian Teague",
   "license": "MIT",

@@ -7,7 +7,7 @@
   "unpkg": "src/index.js",
   "module": "src/index.js",
   "scripts": {
-    "test": "cross-env-shell ../../node_modules/.bin/nyc -i esm -r lcov ../../node_modules/.bin/testmatrix test/unit.test.js && cross-env-shell ../../node_modules/.bin/nyc report",
+    "test": "cross-env-shell ../../node_modules/.bin/nyc -i esm -r lcov ../../node_modules/.bin/testmatrix test/unit-functions.test.js && cross-env-shell ../../node_modules/.bin/nyc report",
     "build": "npm run bundle && npm run minify",
     "createIndex": "node ./util/createIndex.js",
     "bundle": "cross-env-shell DIR=$PKG PKG=$npm_package_alias ../../node_modules/.bin/rollup -i ${DIR}$npm_package_module -o ${DIR}dist/$PKG.js --no-esModule -mf iife -n $PKG",
