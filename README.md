@@ -7,7 +7,7 @@
 
 ## Features
 
-* **Tiny** - 3kb
+* **Tiny** - 1.6 kb
 * **Framework Agnostic** - use with Hyperapp, React, Vue, Angular or anything that has a class attribute
 * **Uniquely scoped class names:** ```.morpho-nnbflx```
 * **Custom css class name prefixing:** ```.article-header-xj38d```
@@ -88,8 +88,7 @@ data: {
 
 ```js
 {
-  classProp: "class",
-  childParam: true,
+  prefix: "morpho"
   unit: "em",
   cssProps: {
     border: {
@@ -100,9 +99,7 @@ data: {
 }
 ```
 
-* *classProp* - Only applies when using the ```@morpho/style``` library.  Use this to specify the name of the property that represents a css class.  For example, React uses the property name ```"className"```.  Default value is ```"class"```.
-  
-* *childParam* - Only applies when using the ```@morpho/style``` library.  This determines how the children property will be used.  For example, Hyperapp uses the function signature ```(props, children)``` while React uses the function signature ```(props)``` and children is accessed through ```props.children```.  Set this value to ```true``` for the ```(props, children)``` Component signature.  Default value is ```false```.
+* *prefix* - This option is used to specific the global custom prefix for generated css class names.  Can be overridden by each css function call ```css({}, "customPrefix")```.  Default value is ```"morpho"```.
   
 * *unit* - This option is used to specify the global default numerical unit.  Examples include: ```"%", "rem", or "px"```.  Default value is ```"px"```. **TODO** - Set several different default units based on [CSS Best Practices](https://gist.github.com/basham/2175a16ab7c60ce8e001)
 
@@ -117,7 +114,7 @@ data: {
   }
   ```
 
-  Note: cssProps will override default vendor and unit settings
+  Note: cssProps will override settings from ```morpho-vendor``` and ```morpho-unit```
 
 
 * ## **Uniquely scoped class names**
@@ -127,13 +124,15 @@ data: {
   ```
 
 * ## **Styled components**
-
-  * For any framework that supports JSX or exposes an h() function, you can use the ```@morpho/style``` library to create styled components
+  
+  * For any framework that supports JSX or exposes an h() function, you can use the ```morpho-style``` library to create styled components
   
   ```js
   import { morpho } from "morpho"
-  const { css, keyframes, styled } = morpho(h, options);
-  //styled requires a JSX h function
+  const { css, keyframes } = morpho(options);
+
+  import {morphoStyle} from "morpho-style"
+  const {styled} = morphoStyle(css, h, styleOptions) //Requires morpho's css function and the JSX h function
   
   const Button = styled("div", {
     margin: "1em",
@@ -143,10 +142,12 @@ data: {
   ```
 
 * ## **Vendor Prefixing**
-   * If you wish to support vendor prefixing, you can use the ```@morpho/vendor``` library which has a predefined list of css properties based on data from ```browserlist``` and ```mdn-browser-compat-data```
+  
+  * If you wish to support vendor prefixing, you can use the ```morpho-vendor``` library which has a predefined list of css properties based on data from ```browserlist``` and ```mdn-browser-compat-data```
   
   ```js
   import { morpho } from "morpho"
+  import { vendorProps } from "morpho-vendor"
 
   const { css, keyframes } = morpho();
 
@@ -163,12 +164,13 @@ data: {
   ```
 
 * ## **Custom default units**
-  * If you want ```morpho``` to default numerical values with unit, you can use the predefined list from ```@morpho\unit```. *Note - This list currently only contains css properties that are unitless.  The global default will append "px".  Todo - Add additional default units to several css properties based on [CSS Best Practices](https://gist.github.com/basham/2175a16ab7c60ce8e001)*
+  * If you want ```morpho``` to default numerical values with unit, you can use the predefined list from ```morpho-unit```. *Note - This list currently only contains css properties that are unitless.  The global default will append "px".  Todo - Add additional default units to several css properties based on [CSS Best Practices](https://gist.github.com/basham/2175a16ab7c60ce8e001)*
   
   ```js
   import { morpho } from "morpho"
+  import { unitProps } from "morpho-unit"
 
-  const { css, keyframes } = morpho();
+  const { css, keyframes } = morpho({cssProps: unitProps});
 
   const vendorClassName = css({
     border: 5

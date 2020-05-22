@@ -1,0 +1,16 @@
+# IDE
+.vscode/
+
+# Logs
+*.log*
+
+# test coverage
+coverage/
+.nyc_output
+
+# Dependencies
+node_modules/
+
+# Distribution
+*.gz
+dist/

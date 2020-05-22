@@ -55,27 +55,8 @@ console.log(browsersVersion);
 cssPrefixes = {};
 collisionCheck = {};
 
-//!!! WARNING !!!
-//This hash function may cause collision with future css property names
-//A different hash function will need to be replaced here and in index.js to create a perfect hash
-var n = new Uint16Array(1)
-function hashCssProp(prop) {
-  n[0] = 0;
-  for (var i = 0; i < prop.length; i++) {
-    n[0] = ((n[0] << 4) - n[0]) + prop.charCodeAt(i);
-  }
-  return n[0].toString(36);
-}
-
 //Find all browsers
 Object.keys(bcd.css.properties).forEach(property => {
-  const hashProperty = hashCssProp(property);
-  if (collisionCheck[hashProperty]) {
-    throw new Error('A collision was detected for the built in hash function.  Please modify the hash function to prevent collisions.' +
-      'hash: ' + hashProperty + ', property: ' + property + ', collision: ' + collisionCheck[hashProperty]);
-  } else {
-    collisionCheck[hashProperty] = property;
-  }
 
   const current = bcd.css.properties[property]
 
@@ -174,7 +155,7 @@ var vendorCssProps = [[], [], [], []]
 
 Object.keys(cssPrefixes).forEach((prop) => {
   cssPrefixes[prop].vendor.forEach((prefix) => {
-    vendorCssProps[vendors.indexOf(prefix)].push(hashCssProp(prop));
+    vendorCssProps[vendors.indexOf(prefix)].push(prop);
   })
 })
 
@@ -235,9 +216,7 @@ var unitCssProps = unitCssPropsNames.map(unitArray => unitArray.map(prop => hash
 
 var index = fs.readFileSync('./util/index.template.js', 'utf-8')
 
-index = index.replace("{{vendors}}", JSON.stringify(vendors, (v, k) => {return k}))
-index = index.replace("{{vendorCssProps}}", JSON.stringify(vendorCssProps, (v, k) => {return k}))
-index = index.replace("{{units}}", JSON.stringify(units, (v, k) => {return k}))
-index = index.replace("{{unitCssProps}}", JSON.stringify(unitCssProps, (v, k) => {return k}))
+index = index.replace("{{vendors}}", JSON.stringify(vendors, (v, k) => {return k}, 2))
+index = index.replace("{{vendorCssProps}}", JSON.stringify(vendorCssProps, (v, k) => {return k}, 2))
 
 fs.writeFileSync('./src/index.js', index);
