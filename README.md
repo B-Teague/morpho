@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="200" height="200" src="./assets/Morpho.png">
+  <img width="200" height="200" src="./assets/Morpho.svg">
 </p>
 
 # <center>Morpho</center>
@@ -48,7 +48,7 @@ If a bundler is not being used, morpho can be imported in a &lt;script&gt; tag a
 
 ```html
 <script type="module">
-  import morpho from "https://unpkg.com/morpho@0.2.0/src/index.js"
+  import morpho from "https://unpkg.com//to be determined//"
 </script>
 ```
 
@@ -57,8 +57,7 @@ If a bundler is not being used, morpho can be imported in a &lt;script&gt; tag a
 ```js
 const options = {} //See options below
 
-const { css, keyframes, styled } = morpho(h, options); 
-//h is only required for styled components
+const { css, keyframes } = morpho(options);
 
 const generatedClassName = css({
   color: "blue"
@@ -101,7 +100,7 @@ data: {
 
 * *prefix* - This option is used to specific the global custom prefix for generated css class names.  Can be overridden by each css function call ```css({}, "customPrefix")```.  Default value is ```"morpho"```.
   
-* *unit* - This option is used to specify the global default numerical unit.  Examples include: ```"%", "rem", or "px"```.  Default value is ```"px"```. **TODO** - Set several different default units based on [CSS Best Practices](https://gist.github.com/basham/2175a16ab7c60ce8e001)
+* *unit* - This option is used to specify the global default numerical unit.  Examples include: ```"%", "rem", or "px"```.  Default value is ```"px"```.
 
 * *cssProps* - Use this option to fully customize how each css property will apply vendor prefixing or default numerical values.  For example, if you want the css property ```transition``` to use the ```"-webkit-"``` prefix and a default unit in milliseconds ```"ms"```,  you would initialize this option to:
 
@@ -137,7 +136,7 @@ data: {
   const Button = styled("div", {
     margin: "1em",
     padding: "0.25em 1em",
-    borderRadius: 3 //defaults to global unit "px"
+    borderRadius: "3px"
   });
   ```
 
@@ -149,7 +148,7 @@ data: {
   import { morpho } from "morpho"
   import { vendorProps } from "morpho-vendor"
 
-  const { css, keyframes } = morpho();
+  const { css, keyframes } = morpho({vendorProps});
 
   const vendorClassName = css({
     boxDirection: "normal"
@@ -217,17 +216,11 @@ data: {
 
 * ## **Media queries**
   
-  ```js
-  css({
-    "@media (max-width: 450px)": {
-      fontSize: "32px"
-    }
-  })
-  ```
-
   ```css
   @media (max-width: 450px) {
-    .morpho-o2rq5t {font-size: 32px;}
+    .morpho-yi32xy {
+      font-size: 32px;
+    }
   }
   ```
 
@@ -263,13 +256,6 @@ data: {
     width: 5,
     columns: 10
   })
-  ```
-
-  ```css
-  .morpho-o2rq5t {
-    width: 5px;
-    columns: 10px;
-  }
   ```
 
 * ## **List of values**
