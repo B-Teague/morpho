@@ -1,6 +1,6 @@
 {
-  "name": "morpho-unit",
-  "alias": "unit",
+  "name": "morpho-unit-functions",
+  "alias": "unit-functions",
   "version": "0.3.0",
   "description": "Adds default units for css properties with numerical values",
   "main": "src/index.js",
