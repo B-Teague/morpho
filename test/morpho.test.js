@@ -2,7 +2,7 @@ import 'jsdom-global/register'
 
 import { equal, deepEqual } from "testmatrix"
 
-import morpho from "../src/index"
+import morpho from '../src/index'
 
 const options = {
   unit: "%",
@@ -30,7 +30,7 @@ export default {
         css({ backgroundColor: "red" })
         return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
       })(),
-      expected: ".morpho-nnbflx {background-color: red;}"
+      expected: ".morpho-mk4wc7 {background-color: red;}"
     },
     { //#2
       name: "insert vendor prefix",
@@ -41,7 +41,7 @@ export default {
         })
         return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
       })(),
-      expected: ".morpho-nh5zfc {-o-border-right-width: 10px; border-right-width: 10px;}"
+      expected: ".morpho-dat4zz {-o-border-right-width: 10px; border-right-width: 10px;}"
     },
     { //#3
       name: "Create a unique keyframes name to be used by a css class",
@@ -57,7 +57,7 @@ export default {
         })
         return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
       })(),
-      expected: "@keyframes morpho-en4vga { \n  from {transform: scale(2);} \n  to {transform: scale(4);} \n}"
+      expected: "@keyframes morpho-o5wy39 { \n  from {transform: scale(2);} \n  to {transform: scale(4);} \n}"
     },
     { //#4
       name: "create a media query",
@@ -78,8 +78,8 @@ export default {
         ]
       })(),
       expected: [
-        "@media (max-width: 450px) {.morpho-o2rq5t h1 {color: yellow;}.morpho-o2rq5t {font-size: 32px;}}",
-        ".morpho-o2rq5t {font-size: 10px;}"
+        "@media (max-width: 450px) {.morpho-3kd75a h1 {color: yellow;}.morpho-3kd75a {font-size: 32px;}}",
+        ".morpho-3kd75a {font-size: 10px;}"
       ]
     },
     { //#5
@@ -91,7 +91,7 @@ export default {
         });
         return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
       })(),
-      expected: ".morpho-yi32xy {border-radius: 10%;}"
+      expected: ".morpho-pryrtz {border-radius: 10%;}"
     },
     { //#6
       name: "pseudo selector",
@@ -105,7 +105,7 @@ export default {
         return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
 
       })(),
-      expected: ".morpho-6oi6pv:hover {color: red;}"
+      expected: ".morpho-1l80iw9:hover {color: red;}"
     },
     { //#7
       name: "repeat a css property multiple times using an array of values",
@@ -116,7 +116,7 @@ export default {
         })
         return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0];
       })(),
-      expected: ".morpho-b34ut1 {position: sticky;}" //! Both occurrences of position were inserted, but the browser only selects the last successful match
+      expected: ".morpho-v61bi1 {position: sticky;}" //! Both occurrences of position were inserted, but the browser only selects the last successful match
     },
     { //#8
       name: "List of values",
@@ -128,7 +128,7 @@ export default {
         return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
 
       })(),
-      expected: ".morpho-ber9to {transition: width 2s;}"
+      expected: ".morpho-ufznj {transition: width 2s;}"
     },
     { //#9
       name: "Test morph without options parm",
@@ -140,7 +140,7 @@ export default {
         return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
 
       })(),
-      expected: ".morpho-ppbal9 {color: orange;}"
+      expected: ".morpho-xteix3 {color: orange;}"
     }
   ]
 }

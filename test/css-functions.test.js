@@ -2,7 +2,7 @@ import 'jsdom-global/register'
 
 import { deepEqual } from "testmatrix"
 
-import { calc, rgb, rgba, rotate, attr, cubicBezier, hsl, hsla, linearGradient, radialGradient, repeatingLinearGradient, repeatingRadialGradient, variable } from "../src/index"
+import { calc, rgb, rgba, rotate, attr, cubicBezier, hsl, hsla, linearGradient, radialGradient, repeatingLinearGradient, repeatingRadialGradient, variable } from "../src/css-functions/index"
 
 export default {
   morpho: [

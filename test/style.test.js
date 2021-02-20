@@ -3,9 +3,8 @@ import 'jsdom-global/register'
 import { equal, deepEqual } from "testmatrix"
 import { h } from "hyperapp"
 
-import morpho from "../../../src/index"
+import { morpho, style } from "../src/index"
 const { css } = morpho();
-import style from "../src/index" //export var styled = .....
 const { styled } = style(css, h)
 const styledWithChildren = style(css, h, { childParam: true })
 

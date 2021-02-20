@@ -2,8 +2,8 @@ import 'jsdom-global/register'
 
 import { equal } from "testmatrix"
 
-import morpho from "../../../src/index"
-import {unitProps} from "../src/index"
+import morpho from "../src/index"
+import {unitProps} from "../src/unit/index"
 
 const { css } = morpho({cssProps: unitProps});
 
