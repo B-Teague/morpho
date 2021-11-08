@@ -2,33 +2,23 @@
   "name": "morpho",
   "version": "0.3.0",
   "description": "A tiny CSS-in-JS library using Javascript objects.",
+  "type": "module",
   "author": "Brian Teague",
   "license": "MIT",
-  "main": "src/index.js",
-  "module": "src/index.js",
-  "unpkg": "src/index.js",
-  "browser": "src/index.js",
   "scripts": {
-    "test": "nyc -i esm -r lcov testmatrix test/morpho.test.js && nyc report",
-    "build": "npm run bundle && npm run minify",
-    "bundle": "cross-env-shell DIR=$PKG PKG=$npm_package_name rollup -i ${DIR}$npm_package_module -o ${DIR}dist/$PKG.js --no-esModule -mf iife -n $PKG",
-    "minify": "cross-env-shell DIR=$PKG PKG=$npm_package_name terser ${DIR}dist/$PKG.js -o ${DIR}dist/$PKG.js -mc --source-map includeSources,url=$PKG.js.map"
+    "test": "c8 ava"
   },
   "files": [
     "src",
     "dist"
   ],
   "devDependencies": {
-    "cross-env": "^7.0.2",
+    "ava": "^3.15.0",
+    "c8": "^7.10.0",
     "esm": "^3.2.25",
-    "hyperapp": "^2.0.4",
-    "jsdom": "^16.2.1",
-    "jsdom-global": "^3.0.2",
-    "nyc": "^15.0.0",
-    "preact": "^10.3.4",
-    "rollup": "^2.0.6",
-    "terser": "^4.6.6",
-    "testmatrix": "^0.1.2"
+    "hyperapp": "^2.0.19",
+    "jsdom": "18.0.1",
+    "jsdom-global": "3.0.2"
   },
   "keywords": [
     "morpho",
@@ -36,6 +26,5 @@
     "css",
     "hyperapp",
     "react"
-  ],
-  "dependencies": {}
+  ]
 }

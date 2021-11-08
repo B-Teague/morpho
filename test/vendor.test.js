@@ -1,25 +1,17 @@
-import 'jsdom-global/register'
-
-import { equal } from "testmatrix"
-
-import morpho from "../src/index"
-import { vendorProps } from "../src/index"
+import 'jsdom-global/register.js'
+import test from 'ava'
+import morpho from "../src/morpho-core/index.js"
+import { vendorProps } from "../src/vendor/index.js"
 
 const options = {
   cssProps: vendorProps
 }
 const { css } = morpho(options);
 
-export default {
-  morpho: [
-    { //#1
-      name: "Create a class that adds a vendor prefix",
-      assert: equal,
-      actual: (() => {
-        css({ transition: ["width", "2s"] })
-        return document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0]
-      })(),
-      expected: ".morpho-nnbflx {-webkit-transition: width 2s; transition: width 2s;}"
-    }
-  ]
-}
+test('Create a class that adds a vendor prefix', t => {
+  css({ transition: ["width", "2s"] });
+	t.deepEqual(
+    document.styleSheets[0].cssRules.map((rule) => rule.cssText)[0],
+    ".morpho-mk4wc7 {-webkit-transition: width 2s; transition: width 2s;}"
+  );
+});
