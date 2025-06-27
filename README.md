@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="200" height="200" src="./assets/Morpho.svg">
+  <img width="400" height="400" src="./assets/Morpho.svg">
 </p>
 
 # <center>Morpho</center>
